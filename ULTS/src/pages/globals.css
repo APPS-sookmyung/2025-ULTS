@@ -1,332 +1,219 @@
-/* ===== Global Design Tokens (OKLCH) ===== */
-:root {
-    /* 폰트 (Vite에서는 next/font 대신 직접 지정) */
-    --font-sans: "Open Sans", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
-    --font-serif: "Montserrat", Georgia, "Times New Roman", serif;
+/* ==========================================================================
+   Global Design Tokens (OKLCH)
+   ========================================================================== */
+:root{
+  /* Fonts */
+  --font-sans: "Open Sans", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Montserrat", Georgia, "Times New Roman", serif;
 
-    /* Light tokens */
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.35 0.02 252);
+  /* Light */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.35 0.02 252);
 
-    --card: oklch(0.98 0.01 340);
-    --card-foreground: oklch(0.35 0.02 252);
+  --card: oklch(0.98 0.01 340);
+  --card-foreground: oklch(0.35 0.02 252);
 
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.35 0.02 252);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.35 0.02 252);
 
-    --primary: oklch(0.45 0.22 348);
-    --primary-foreground: oklch(1 0 0);
+  --primary: oklch(0.45 0.22 348);
+  --primary-foreground: oklch(1 0 0);
 
-    --secondary: oklch(0.98 0.01 340);
-    --secondary-foreground: oklch(0.35 0.02 252);
+  --secondary: oklch(0.98 0.01 340);
+  --secondary-foreground: oklch(0.35 0.02 252);
 
-    --muted: oklch(0.98 0.005 240);
-    --muted-foreground: oklch(0.3 0.02 252);
+  --muted: oklch(0.98 0.005 240);
+  --muted-foreground: oklch(0.3 0.02 252);
 
-    --accent: oklch(0.65 0.25 330);
-    --accent-foreground: oklch(1 0 0);
+  --accent: oklch(0.65 0.25 330);
+  --accent-foreground: oklch(1 0 0);
 
-    --destructive: oklch(0.55 0.22 25);
-    --destructive-foreground: oklch(1 0 0);
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(1 0 0);
 
-    --border: oklch(0.92 0.005 240);
-    --input: oklch(0.98 0.005 240);
-    --ring: oklch(0.65 0.25 330);
+  --border: oklch(0.92 0.005 240);
+  --input: oklch(0.98 0.005 240);
+  --ring: oklch(0.65 0.25 330);
 
-    --chart-1: oklch(0.45 0.22 348);
-    --chart-2: oklch(0.65 0.18 85);
-    --chart-3: oklch(0.55 0.15 200);
-    --chart-4: oklch(0.55 0.22 25);
-    --chart-5: oklch(0.65 0.18 85);
-
-    --radius: 0.5rem;
-
-    /* Space/galaxy bg (for constellation) */
-    --bg-1: #0f172a;
-    /* slate-900 */
-    --bg-2: #4c1d95;
-    /* purple-900 */
+  --radius: 0.5rem;
 }
 
-/* 다크모드: html에 class="dark" 붙이면 활성화 */
-html.dark {
-    --background: oklch(0.12 0.01 252);
-    --foreground: oklch(0.95 0.005 340);
+/* Dark mode (html.dark) */
+html.dark{
+  --background: oklch(0.12 0.01 252);
+  --foreground: oklch(0.95 0.005 340);
 
-    --card: oklch(0.15 0.01 252);
-    --card-foreground: oklch(0.95 0.005 340);
+  --card: oklch(0.15 0.01 252);
+  --card-foreground: oklch(0.95 0.005 340);
 
-    --popover: oklch(0.12 0.01 252);
-    --popover-foreground: oklch(0.95 0.005 340);
+  --popover: oklch(0.12 0.01 252);
+  --popover-foreground: oklch(0.95 0.005 340);
 
-    --primary: oklch(0.65 0.25 348);
-    --primary-foreground: oklch(0.12 0.01 252);
+  --primary: oklch(0.65 0.25 348);
+  --primary-foreground: oklch(0.12 0.01 252);
 
-    --secondary: oklch(0.18 0.01 252);
-    --secondary-foreground: oklch(0.95 0.005 340);
+  --secondary: oklch(0.18 0.01 252);
+  --secondary-foreground: oklch(0.95 0.005 340);
 
-    --muted: oklch(0.18 0.01 252);
-    --muted-foreground: oklch(0.7 0.01 252);
+  --muted: oklch(0.18 0.01 252);
+  --muted-foreground: oklch(0.7 0.01 252);
 
-    --accent: oklch(0.7 0.25 330);
-    --accent-foreground: oklch(0.12 0.01 252);
+  --accent: oklch(0.7 0.25 330);
+  --accent-foreground: oklch(0.12 0.01 252);
 
-    --destructive: oklch(0.6 0.22 25);
-    --destructive-foreground: oklch(0.95 0.005 340);
+  --destructive: oklch(0.6 0.22 25);
+  --destructive-foreground: oklch(0.95 0.005 340);
 
-    --border: oklch(0.18 0.01 252);
-    --input: oklch(0.18 0.01 252);
-    --ring: oklch(0.7 0.25 330);
+  --border: oklch(0.18 0.01 252);
+  --input: oklch(0.18 0.01 252);
+  --ring: oklch(0.7 0.25 330);
 }
 
-/* ===== Base Reset ===== */
-* {
-    box-sizing: border-box;
+/* ==========================================================================
+   Base Reset
+   ========================================================================== */
+*{ box-sizing:border-box; }
+html, body, #root{ height:100%; }
+body{
+  margin:0;
+  background: var(--background);           /* ← 전역 보라 배경 제거 */
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-html,
-body,
-#root {
-    height: 100%;
+/* ==========================================================================
+   Generic UI (Buttons, Inputs, Forms)
+   ========================================================================== */
+.btn{
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.6rem 1rem; border-radius:.5rem; cursor:pointer;
+  font-weight:500; text-decoration:none; border:1px solid transparent;
+  color: var(--foreground); background: transparent;
+}
+.btn:hover{ background: color-mix(in oklch, var(--foreground) 10%, transparent); }
+
+.btn-primary{
+  background: linear-gradient(90deg, var(--accent), var(--primary));
+  color: var(--primary-foreground); border:none;
+}
+.btn-primary:hover{ filter:brightness(1.05); }
+
+.btn-outline{
+  background:#fff; color:#111827; border:1px solid #d1d5db;
+}
+.btn:disabled{ opacity:.5; cursor:not-allowed; }
+
+.input, .textarea{
+  width:100%; border:1px solid var(--border); border-radius:10px;
+  padding:10px 12px; background: var(--input); color: var(--foreground);
+  font-size:1rem; outline:none;
+}
+.input:focus, .textarea:focus{
+  border-color:#a21caf; box-shadow:0 0 0 4px rgba(162,28,175,.12);
+}
+.textarea{ min-height:140px; resize:vertical; }
+
+.form{ margin-top:1.5rem; display:grid; gap:.75rem; width:min(560px, 92vw); }
+.label{ text-align:left; font-weight:600; color:#374151; }
+.helper{ font-size:.9rem; color:#6b7280; }
+.row{ display:flex; gap:.75rem; align-items:center; justify-content:center; flex-wrap:wrap; }
+
+.kbd{
+  font-family:ui-monospace, SFMono-Regular, Menlo, monospace;
+  background:#111827; color:#fff; border-radius:.35rem; padding:.15rem .4rem; font-size:.85rem;
 }
 
-body {
-    margin: 0;
-    background:
-        radial-gradient(1200px 600px at 50% -20%, #2e1065 0%, transparent 60%),
-        linear-gradient(135deg, var(--bg-1), var(--bg-2), var(--bg-1));
-    color: var(--foreground);
-    font-family: 'Open Sans', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+/* ==========================================================================
+   Landing (hero)
+   ========================================================================== */
+.hero{
+  min-height:100vh;
+  background: linear-gradient(to bottom, #fde2f2, #ffffff);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; padding:2rem; color:#111827;
 }
 
-/* ===== Constellation Layout ===== */
-.constellation-wrap {
-    min-height: 100vh;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
+/* ==========================================================================
+   Constellation page (sky, canvas, stars)
+   ========================================================================== */
+.sky{
+  min-height:100vh;
+  background: radial-gradient(60% 80% at 50% 0%, #6124d6 0%, #3a0c69 40%, #130428 100%);
+  color:#fff; display:flex; flex-direction:column;
+}
+.sky-header{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:1rem 2rem; border-bottom:1px solid rgba(255,255,255,.1);
+}
+.canvas{
+  flex:1; margin:2rem; border-radius:1rem;
+  border:1px solid rgba(255,255,255,.1);
+  background: rgba(255,255,255,.05);
+  backdrop-filter: saturate(120%) blur(6px);
+  position:relative; min-height:540px; overflow:hidden;
 }
 
-.header {
-    position: relative;
-    z-index: 10;
-    padding: 24px;
+/* decorative background dots (click-through) */
+.bg-stars{ position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:0; }
+.bg-star{
+  position:absolute; width:4px; height:4px; background:#fff; border-radius:999px;
+  opacity:.6; animation:pulse 2.2s ease-in-out infinite; pointer-events:none;
+}
+@keyframes pulse{
+  0%,100%{ transform:scale(1); opacity:.6; }
+  50%{ transform:scale(1.4); opacity:1; }
 }
 
-.header-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+/* created stars */
+.star-dot{
+  position:absolute; width:10px; height:10px; border-radius:999px;
+  background:#fbbf24; box-shadow:0 0 12px rgba(251,191,36,.9);
+  cursor:pointer; transform:translate(-50%,-50%); transition:transform .25s ease;
+  z-index:1;
 }
+.star-dot:hover{ transform:translate(-50%,-50%) scale(1.15); }
 
-/* Buttons */
-.btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 12px;
-    border-radius: 10px;
-    border: 1px solid transparent;
-    background: transparent;
-    color: var(--foreground);
-    cursor: pointer;
+/* optional tooltip inside star element */
+.tooltip{
+  position:absolute; left:50%; transform:translateX(-50%); top:-28px;
+  white-space:nowrap; background:#000a; color:#fff; font-size:12px;
+  padding:4px 8px; border-radius:6px; opacity:0; transition:opacity .2s;
 }
+.star-dot:hover .tooltip{ opacity:1; }
 
-.btn:hover {
-    background-color: color-mix(in oklch, var(--foreground) 10%, transparent);
+/* ==========================================================================
+   Modal
+   ========================================================================== */
+.modal-backdrop{
+  position:fixed; inset:0; background:rgba(0,0,0,.55);
+  display:flex; align-items:center; justify-content:center; z-index:50;
 }
-
-.btn-primary {
-    background: linear-gradient(90deg, var(--accent), var(--primary));
-    color: var(--primary-foreground);
-    border: none;
+.modal{
+  width:min(640px,92vw); background:#fff; color:#111827;
+  border-radius:1rem; padding:1.25rem; box-shadow:0 10px 30px rgba(0,0,0,.2);
 }
+.modal h3{ font-size:1.25rem; font-weight:700; }
 
-.btn-primary:hover {
-    filter: brightness(1.05);
-}
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.footer{ text-align:center; color:oklch(0.7 0.02 252); padding:24px 0; }
+.footer small{ display:block; margin-top:4px; color:oklch(0.6 0.02 252); }
 
-.icon {
-    width: 16px;
-    height: 16px;
-}
+/* ==========================================================================
+   Optional (legacy/unused) – 필요 시만 사용
+   ========================================================================== */
+/* 페이지 타이틀 폰트 */
+.page-title{ font-family: var(--font-serif); font-weight:800; font-size:28px; }
 
-/* Title */
-.page-title {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 800;
-    font-size: 28px;
-}
+/* 레이아웃 래퍼/헤더(다른 페이지에서 쓰면 사용) */
+.constellation-wrap{ min-height:100vh; position:relative; overflow:hidden; display:flex; flex-direction:column; }
+.header{ position:relative; z-index:10; padding:24px; }
+.header-inner{ max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; }
 
-/* Canvas: 헤더/푸터 사이 공간을 꽉 채움 */
-.canvas {
-    flex: 1;
-    position: relative;
-    margin: 0 24px 24px;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    backdrop-filter: saturate(120%) blur(6px);
-    background: linear-gradient(135deg, #312e81AA, #581c87AA);
-    min-height: 480px;
-}
-
-/* Background stars (click-through) */
-.bg-stars {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-    z-index: 0;
-}
-
-.bg-star {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: #fff;
-    border-radius: 999px;
-    opacity: .6;
-    animation: pulse 2.2s ease-in-out infinite;
-    pointer-events: none;
-}
-
-@keyframes pulse {
-
-    0%,
-    100% {
-        transform: scale(1);
-        opacity: .6
-    }
-
-    50% {
-        transform: scale(1.4);
-        opacity: 1
-    }
-}
-
-/* Ensure clickable layers are above */
-.header,
-.canvas {
-    position: relative;
-    z-index: 1;
-}
-
-/* Created stars */
-.star {
-    position: absolute;
-    cursor: pointer;
-    transition: transform .25s ease;
-}
-
-.star:hover {
-    transform: scale(1.25);
-}
-
-.star-shape {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: radial-gradient(#fff, #facc15);
-    box-shadow: 0 0 8px 2px rgba(250, 204, 21, .8);
-}
-
-/* Tooltip (title) */
-.tooltip {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: -28px;
-    white-space: nowrap;
-    background: #000a;
-    color: #fff;
-    font-size: 12px;
-    padding: 4px 8px;
-    border-radius: 6px;
-    opacity: 0;
-    transition: opacity .2s;
-}
-
-.star:hover .tooltip {
-    opacity: 1;
-}
-
-/* Modal */
-.modal {
-    position: fixed;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 16px;
-    backdrop-filter: blur(6px);
-    background: #0008;
-    z-index: 9999;
-    pointer-events: auto;
-}
-
-.card {
-    width: 100%;
-    max-width: 520px;
-    background: var(--card);
-    color: var(--card-foreground);
-    border-radius: var(--radius);
-    box-shadow: 0 10px 30px #0005;
-    padding: 20px;
-}
-
-.card-header {
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.card-title {
-    font-weight: 700;
-    font-family: 'Montserrat', sans-serif;
-}
-
-.card-date {
-    font-size: 12px;
-    color: oklch(0.6 0.02 252);
-    margin-top: 4px;
-}
-
-.card-actions {
-    display: flex;
-    gap: 8px;
-    margin-top: 12px;
-}
-
-.input,
-.textarea {
-    width: 100%;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 10px 12px;
-    background: var(--input);
-    color: var(--foreground);
-}
-
-.textarea {
-    min-height: 140px;
-    resize: vertical;
-}
-
-/* Footer */
-.footer {
-    text-align: center;
-    color: oklch(0.7 0.02 252);
-    padding: 24px 0;
-}
-
-.footer small {
-    display: block;
-    margin-top: 4px;
-    color: oklch(0.6 0.02 252);
+/* 접근성: 모션 줄이기 */
+@media (prefers-reduced-motion: reduce){
+  .bg-star{ animation:none; }
 }

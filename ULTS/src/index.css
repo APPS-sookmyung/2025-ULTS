@@ -1,68 +1,111 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+/* globals.css */
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
+/* 공통 초기화 */
+* {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: #fff;
+  color: #111827; /* 기본 글자색 */
+}
+
+/* 랜딩 페이지 */
+.hero {
   min-height: 100vh;
+  background: linear-gradient(to bottom, #fde2f2, #ffffff); /* pink-50 → white */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-top: 1rem;
+  color: #1f2937; /* neutral-800 */
+}
+.hero p {
+  margin-top: 1rem;
+  color: #4b5563; /* neutral-600 */
+  line-height: 1.6;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  border-radius: 0.5rem;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.btn-primary {
+  background: #a21caf; /* fuchsia-700 */
+  color: white;
+  border: none;
+}
+
+.btn-outline {
+  background: white;
+  color: #111827;
+  border: 1px solid #d1d5db; /* neutral-300 */
+}
+
+/* 별자리 페이지 */
+.sky {
+  min-height: 100vh;
+  background: radial-gradient(60% 80% at 50% 0%, #6124d6 0%, #3a0c69 40%, #130428 100%);
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.sky-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.canvas {
+  flex: 1;
+  margin: 2rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255,255,255,.1);
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(6px);
+  position: relative;
+  min-height: 540px;
+}
+
+.star {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  color: #fbbf24; /* amber-400 */
+}
+
+.sky-footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.7);
 }
