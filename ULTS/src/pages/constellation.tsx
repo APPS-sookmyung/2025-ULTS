@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 /** 타입과 저장 유틸을 이 파일에 내장 */
 interface Letter {
   id: string;
-  to: string;      // 받는 이(원문)
+  to: string;      // 받는 이 (원문)
   slug: string;    // URL key
   body: string;    // 편지 내용
   createdAt: number;
