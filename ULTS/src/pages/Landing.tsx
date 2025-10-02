@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useLocation } from "wouter";
 
-// 파일 없이 쓰는 간단 slugify
+// slugify 함수 그대로 사용
 const slugify = (s: string) =>
   s.trim().toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9\-가-힣]/g, "");
 
@@ -13,41 +13,46 @@ export default function Landing() {
     const v = to.trim();
     if (!v) return;
     const slug = slugify(v);
-    // 대상 원문만 저장(헤더 표시용)
     localStorage.setItem(`ults.recipient.${slug}`, v);
     navigate(`/r/${encodeURIComponent(slug)}`);
   };
 
   return (
-    <main className="hero">
-      <p>APPS 신입 부원 개인 프로젝트</p>
-      <h1>전달할 수 없는 편지</h1>
-      <p className="subtitle" style={{ marginTop: ".25rem", color: "#a21caf", fontWeight: 700 }}>
-        그 별에 닿기를
+    <main className="hero text-center">
+      {/* 헤더 */}
+      <h1 className="text-4xl font-bold text-gray-900">마음을 전하는 편지</h1>
+      <p className="mt-2 text-lg text-pink-700 font-semibold">그 별에 닿기를 ✨</p>
+
+      {/* 설명 */}
+      <p className="mt-6 text-gray-600 leading-relaxed max-w-xl mx-auto">
+        아직 전하지 못한 말들을 편지로 남겨보세요.<br />
+        당신의 이야기가 별빛이 되어 빛납니다.
       </p>
 
-      <p style={{ marginTop: "1rem", color: "#4b5563", lineHeight: 1.6 }}>
-        마음 속 깊은 곳에 간직한 이야기들과 꿈을 향한 여정.<br />
-        전하지 못한 마음들이 별이 되어 우리를 비춥니다.
-      </p>
-
-      <div className="form">
-        <label className="label" htmlFor="to">✉️ 누구에게 편지를 전하고 싶나요?</label>
+      {/* 입력 박스 */}
+      <div className="mt-8 bg-white shadow-md rounded-2xl p-6 max-w-md mx-auto">
+        <label htmlFor="to" className="block text-sm font-medium text-gray-700 mb-2">
+          ✉️ 누구에게 편지를 쓰고 싶나요?
+        </label>
         <input
           id="to"
-          className="input"
-          placeholder="예) 첫사랑에게 / 떠난 친구에게 / 미래의 나에게 / 엄마에게 …"
+          className="input w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-pink-500 focus:outline-none"
+          placeholder="예) 첫사랑에게, 미래의 나에게, 엄마에게 …"
           value={to}
           onChange={(e) => setTo(e.target.value)}
           maxLength={40}
           onKeyDown={(e) => { if (e.key === "Enter") go(); }}
         />
-        <p className="helper">자유롭게 이름/호칭을 적고, Enter로 시작할 수 있어요.</p>
-      </div>
+        <p className="text-xs text-gray-500 mt-2">
+          이름이나 호칭을 적고 Enter 키를 눌러도 시작할 수 있어요.
+        </p>
 
-      <div className="hero-buttons" style={{ marginTop: "1rem" }}>
-        <button className="btn btn-outline" onClick={go} disabled={!to.trim()}>
-          별자리 만들기
+        <button
+          className="mt-4 w-full btn bg-pink-600 text-white rounded-lg py-2 font-semibold hover:bg-pink-700 disabled:opacity-40"
+          onClick={go}
+          disabled={!to.trim()}
+        >
+          편지 쓰기 ✨
         </button>
       </div>
     </main>

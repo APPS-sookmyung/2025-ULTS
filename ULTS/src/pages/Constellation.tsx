@@ -74,6 +74,11 @@ export default function RecipientPage() {
 
   return (
     <div className="sky">
+      {/* 🎵 배경 음악 */}
+      <audio autoPlay loop>
+        <source src="/bg-music.mp3" type="audio/mpeg" />
+        브라우저가 오디오 태그를 지원하지 않아요.
+      </audio>
       <header className="sky-header">
         <Link href="/"><a style={{ color: "#fff", textDecoration: "none" }}>← 돌아가기</a></Link>
         <h2 style={{ fontWeight: 700 }}>
