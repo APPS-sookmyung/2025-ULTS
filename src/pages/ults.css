@@ -8,7 +8,7 @@
   --color-border: #d1d5db;
 }
 
-/* Buttons ------------------------------------------------------------ */
+/* Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -43,7 +43,7 @@
   cursor: not-allowed;
 }
 
-/* Inputs / Textareas ------------------------------------------------ */
+/* Inputs / Textareas */
 .input,
 .textarea {
   width: 100%;
@@ -61,7 +61,7 @@
   resize: vertical;
 }
 
-/* Modal -------------------------------------------------------------- */
+/* Modal */
 .modal-backdrop {
   position: fixed;
   inset: 0;

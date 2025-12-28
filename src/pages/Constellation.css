@@ -1,6 +1,6 @@
 /* Constellation.css — 별자리 페이지 전용 */
 
-/* 전체 배경 ---------------------------------------------------------- */
+/* 전체 배경 */
 .sky {
   min-height: 100vh;
   background: radial-gradient(
@@ -14,7 +14,7 @@
   flex-direction: column;
 }
 
-/* 헤더 --------------------------------------------------------------- */
+/* 헤더 */
 .sky-header {
   display: flex;
   justify-content: space-between;
@@ -23,7 +23,7 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* 별이 표시되는 캔버스 ------------------------------------------------ */
+/* 별이 표시되는 캔버스 */
 .canvas {
   flex: 1;
   margin: 2rem;
@@ -36,7 +36,7 @@
   overflow: hidden;
 }
 
-/* 랜덤 배경 별(옵션) -------------------------------------------------- */
+/* 랜덤 배경 별 */
 .bg-star {
   position: absolute;
   width: 4px;
@@ -59,11 +59,12 @@
   }
 }
 
+/* 작성 폰트 */
 .textarea {
   font-family: "Pretendard Serif", serif;
 }
 
-/* 저장된 편지 → 별 --------------------------------------------------- */
+/* 저장된 편지 → 별 */
 .star-dot {
   position: absolute;
   width: 10px;
@@ -81,7 +82,7 @@
   transform: translate(-50%, -50%) scale(1.15);
 }
 
-/* 하단 푸터 --------------------------------------------------------- */
+/* 하단 푸터 */
 .sky-footer {
   text-align: center;
   padding: 1rem;

@@ -22,45 +22,62 @@
   margin-left: 15px;
 }
 
+/* 배경 이미지 */
+.hero {
+  position: relative;
+  height: 980px;
+  background-image: url("/star.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-actionBtn {
+  position: absolute;
+
+  bottom: 170px;
+  /* 이미지 하단에서 살짝 위 */
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  padding: 16px 36px;
+  font-size: 18px;
+  font-weight: 600;
+
+  background: #ff5ba0;
+  color: white;
+  border: none;
+  border-radius: 999px;
+
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(255, 91, 160, 0.4);
+  transition: all 0.25s ease;
+}
+
+.hero-actionBtn:hover {
+  transform: translateX(-50%) translateY(-3px);
+  box-shadow: 0 14px 36px rgba(255, 91, 160, 0.55);
+}
+
 /* Content layout */
 .content {
   display: flex;
-  margin: 40px auto;
-  max-width: 1100px;
-  gap: 64px;
-  align-items: center;
-}
+  justify-content: center;
+  align-items: flex-start;
 
-.left {
-  flex: 1;
-}
-
-.imageBox {
-  background: none;
-  padding: 0;
-  box-shadow: none;
-}
-
-.imageBox img {
-  width: 420px;
-  border-radius: 16px;
-  object-fit: cover;
+  min-height: calc(100vh - 80px);
+  /* 헤더 높이 고려 */
+  margin: 0 auto;
+  padding-top: 12vh;
 }
 
 /* Right text area */
-.right {
-  flex: 1;
-  padding-left: 0;
-}
-
-.right h2 {
-  font-size: 30px;
-  margin-bottom: 10px;
-}
-
-.sub {
-  color: #777;
-  margin-bottom: 10px;
+.body {
+  display: flex;
+  justify-content: center;
+  /* 가로 중앙 */
+  padding: 80px 20px 120px;
+  /* 위/아래 여백 */
 }
 
 .price {
@@ -80,17 +97,6 @@
 }
 
 /* Button */
-.actionBtn {
-  margin-top: 20px;
-  padding: 14px 30px;
-  font-size: 18px;
-  background: #ff5ba0;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
 .nav button {
   border: 1px solid #ccc;
   background: white;
@@ -113,7 +119,8 @@
   display: block;
   font-size: 20px;
   font-weight: 600;
-  color: #ff5ba0; /* 네 메인 포인트 컬러 */
+  color: #ff5ba0;
+  /* 네 메인 포인트 컬러 */
   margin-bottom: 8px;
 }
 
@@ -145,32 +152,39 @@
   margin-bottom: 18px;
 }
 
-/* 마지막 아이콘 */
+/* 아이콘 */
 .icon {
   margin-left: 6px;
   font-size: 18px;
 }
 
 .detail {
-  background: #fff7fb;         /* 연핑크 감성 */
+  background: #fff7fb;
   border: 1px solid #ffe2ef;
-  padding: 22px 26px;
-  border-radius: 14px;
-  max-width: 520px;
-  margin-top: 16px;
-  line-height: 1.7;
-  color: #555;
-  box-shadow: 0 2px 6px rgba(255, 150, 200, 0.15);
+  border-radius: 20px;
+
+  padding: 70px 90px;
+  max-width: 900px;
+  width: 100%;
+
+  text-align: center;
+  /* 글씨 가운데 */
+  box-shadow: 0 12px 30px rgba(255, 150, 200, 0.18);
 }
 
 .detail p {
-  max-width: 460px;
-  margin-top: 22px;
-  color: #555;
-  line-height: 1.75;
+  font-size: 30px;
+  /* 글씨 키우기 */
+  line-height: 1.6;
+  color: #444;
 
-  margin-bottom: 20px;
-  font-size: 15.5px;
+  margin-bottom: 32px;
+  text-align: center;
+}
 
-  color: #666;
+/* To 입력 모달 전용 */
+.modal.to-modal {
+  width: 420px;
+  max-width: 90vw;
+  padding: 24px 28px;
 }

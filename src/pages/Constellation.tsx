@@ -16,7 +16,7 @@ interface Letter {
 
 const DB_KEY = "ults.letters.noName";
 
-/** DB 로드/저장 */
+/** DB 로드 & 저장 */
 const loadLetters = (): Letter[] => {
   try {
     const raw = localStorage.getItem(DB_KEY);
@@ -31,11 +31,10 @@ const saveLetters = (letters: Letter[]) =>
 
 const emotionColorMap: Record<Emotion, string> = {
   happy: "#FCD34D", // 노랑
-  sad: "#60A5FA",   // 파랑
+  sad: "#60A5FA", // 파랑
   angry: "#F87171", // 빨강
-  calm: "#A7F3D0",  // 민트
+  calm: "#A7F3D0", // 연두
 };
-
 
 /** 새로운 편지 저장 */
 const addLetter = (body: string, emotion: Emotion): Letter => {
@@ -44,7 +43,7 @@ const addLetter = (body: string, emotion: Emotion): Letter => {
   const letter: Letter = {
     id: crypto.randomUUID(),
     body: body.trim(),
-    emotion, // ✅ 여기!
+    emotion,
     createdAt: Date.now(),
     x: Math.round(10 + Math.random() * 80),
     y: Math.round(10 + Math.random() * 70),
@@ -55,6 +54,12 @@ const addLetter = (body: string, emotion: Emotion): Letter => {
   return letter;
 };
 
+/** 작성한 편지 삭제 */
+const deleteLetter = (id: string) => {
+  const letters = loadLetters();
+  const next = letters.filter((lt) => lt.id !== id);
+  saveLetters(next);
+};
 
 /** 메인 페이지 */
 export default function Constellation() {
@@ -67,6 +72,7 @@ export default function Constellation() {
     setLetters(loadLetters());
   }, [open]);
 
+  // 배경 음악
   useEffect(() => {
     if (!bgmRef.current) return;
 
@@ -82,7 +88,6 @@ export default function Constellation() {
       window.removeEventListener("click", unmute);
     };
   }, []);
-
 
   // 배경 점 생성
   const dots = useMemo(
@@ -160,6 +165,10 @@ export default function Constellation() {
         <ReadLetterModal
           letter={openedLetter}
           onClose={() => setOpenedLetter(null)}
+          onDelete={(id) => {
+            deleteLetter(id);
+            setLetters(loadLetters()); // 별 즉시 반영
+          }}
         />
       )}
 
@@ -226,7 +235,6 @@ function LetterModal({
           ))}
         </div>
 
-
         <textarea
           className="textarea"
           value={text}
@@ -252,10 +260,12 @@ function LetterModal({
 
 function ReadLetterModal({
   letter,
-  onClose
+  onClose,
+  onDelete,
 }: {
   letter: Letter;
   onClose: () => void;
+  onDelete: (id: string) => void;
 }) {
   return (
     <div className="modal-backdrop" onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
@@ -276,6 +286,17 @@ function ReadLetterModal({
         </p>
 
         <div className="modal-actions" style={{ marginTop: "1rem" }}>
+          <button
+            className="btn btn-outline"
+            onClick={() => {
+              if (confirm("이 편지를 삭제할까요?")) {
+                onDelete(letter.id);
+                onClose();
+              }
+            }}
+          >
+            Delete
+          </button>
           <button className="btn btn-primary" onClick={onClose}>Close</button>
         </div>
       </div>
