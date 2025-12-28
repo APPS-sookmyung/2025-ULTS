@@ -1,65 +1,90 @@
-import { Link, useRoute } from "wouter";
-import { useEffect, useMemo, useState } from "react";
+import "./Constellation.css";
+import { useState, useEffect, useMemo, useRef } from "react";
+import { Link } from "wouter";
 
-/** 타입과 저장 유틸을 이 파일에 내장 */
+type Emotion = "happy" | "sad" | "angry" | "calm";
+
+/** 편지를 위한 타입 */
 interface Letter {
   id: string;
-  to: string;      // 받는 이 (원문)
-  slug: string;    // URL key
-  body: string;    // 편지 내용
+  body: string;
   createdAt: number;
-  x: number;       // 0~100 (%)
-  y: number;       // 0~100 (%)
+  x: number; // 위치 %
+  y: number; // 위치 %
+  emotion: Emotion;
 }
 
-const DB_KEY = "ults.letters.v1";
-const loadDB = (): Record<string, Letter[]> => {
+const DB_KEY = "ults.letters.noName";
+
+/** DB 로드/저장 */
+const loadLetters = (): Letter[] => {
   try {
     const raw = localStorage.getItem(DB_KEY);
-    return raw ? JSON.parse(raw) : {};
+    return raw ? JSON.parse(raw) : [];
   } catch {
-    return {};
+    return [];
   }
 };
-const saveDB = (db: Record<string, Letter[]>) =>
-  localStorage.setItem(DB_KEY, JSON.stringify(db));
 
-const getLetters = (slug: string): Letter[] => {
-  const db = loadDB();
-  return db[slug] || [];
+const saveLetters = (letters: Letter[]) =>
+  localStorage.setItem(DB_KEY, JSON.stringify(letters));
+
+const emotionColorMap: Record<Emotion, string> = {
+  happy: "#FCD34D", // 노랑
+  sad: "#60A5FA",   // 파랑
+  angry: "#F87171", // 빨강
+  calm: "#A7F3D0",  // 민트
 };
-const addLetter = (to: string, slug: string, body: string): Letter => {
-  const db = loadDB();
-  const list = db[slug] || [];
+
+
+/** 새로운 편지 저장 */
+const addLetter = (body: string, emotion: Emotion): Letter => {
+  const letters = loadLetters();
+
   const letter: Letter = {
     id: crypto.randomUUID(),
-    to,
-    slug,
     body: body.trim(),
+    emotion, // ✅ 여기!
     createdAt: Date.now(),
     x: Math.round(10 + Math.random() * 80),
     y: Math.round(10 + Math.random() * 70),
   };
-  list.push(letter);
-  db[slug] = list;
-  saveDB(db);
+
+  letters.push(letter);
+  saveLetters(letters);
   return letter;
 };
-/** ------------------------ */
 
-export default function RecipientPage() {
-  const [, params] = useRoute("/r/:slug");
-  const slug = params?.slug ?? "";
-  const to = localStorage.getItem(`ults.recipient.${slug}`) || slug;
 
+/** 메인 페이지 */
+export default function Constellation() {
   const [letters, setLetters] = useState<Letter[]>([]);
   const [open, setOpen] = useState(false);
+  const [openedLetter, setOpenedLetter] = useState<Letter | null>(null);
+  const bgmRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    setLetters(getLetters(slug));
-  }, [slug, open]);
+    setLetters(loadLetters());
+  }, [open]);
 
-  // 장식용 점
+  useEffect(() => {
+    if (!bgmRef.current) return;
+
+    const unmute = () => {
+      bgmRef.current!.muted = false;
+      bgmRef.current!.volume = 0.2; // 은은하게
+      window.removeEventListener("click", unmute);
+    };
+
+    window.addEventListener("click", unmute);
+
+    return () => {
+      window.removeEventListener("click", unmute);
+    };
+  }, []);
+
+
+  // 배경 점 생성
   const dots = useMemo(
     () =>
       Array.from({ length: 40 }).map((_, i) => ({
@@ -74,95 +99,184 @@ export default function RecipientPage() {
 
   return (
     <div className="sky">
-      {/* 🎵 배경 음악 */}
-      <audio autoPlay loop>
-        <source src="/bg-music.mp3" type="audio/mpeg" />
-        브라우저가 오디오 태그를 지원하지 않아요.
-      </audio>
       <header className="sky-header">
-        <Link href="/"><a style={{ color: "#fff", textDecoration: "none" }}>← 돌아가기</a></Link>
-        <h2 style={{ fontWeight: 700 }}>
-          {to}에게 보내는 밤하늘
-          <span style={{ opacity: .7, fontSize: 14, marginLeft: 8 }}>총 {letters.length}개의 별</span>
-        </h2>
-        <button className="btn btn-primary" onClick={() => setOpen(true)}>편지 쓰기</button>
+        <Link href="/">
+          <a style={{ color: "#fff", textDecoration: "none" }}>← Back</a>
+        </Link>
+        <h2 style={{ fontWeight: 700 }}>Unsent Words in the Sky</h2>
+
+        <button className="btn btn-primary" onClick={() => setOpen(true)}>
+          Create a Star
+        </button>
       </header>
 
       <main className="canvas">
         {/* 배경 점 */}
-        {dots.map(d => (
-          <span key={d.id}
-                style={{
-                  position: "absolute",
-                  left: `${d.left}%`,
-                  top: `${d.top}%`,
-                  width: d.size,
-                  height: d.size,
-                  borderRadius: "999px",
-                  background: "#fff",
-                  opacity: d.opacity,
-                  filter: "blur(.3px)"
-                }}/>
+        {dots.map((d) => (
+          <span
+            key={d.id}
+            style={{
+              position: "absolute",
+              left: `${d.left}%`,
+              top: `${d.top}%`,
+              width: d.size,
+              height: d.size,
+              borderRadius: "999px",
+              background: "#fff",
+              opacity: d.opacity,
+              filter: "blur(.3px)",
+            }}
+          />
         ))}
 
         {/* 저장된 편지 → 별 */}
-        {letters.map(lt => (
+        {letters.map((lt) => (
           <button
             key={lt.id}
             className="star-dot"
-            style={{ left: `${lt.x}%`, top: `${lt.y}%` }}
-            onClick={() =>
-              alert(`『${to}』에게 보낸 편지\n\n${lt.body}\n\n${new Date(lt.createdAt).toLocaleString()}`)
-            }
-            title={new Date(lt.createdAt).toLocaleString()}
+            style={{
+              left: `${lt.x}%`,
+              top: `${lt.y}%`,
+              backgroundColor: emotionColorMap[lt.emotion],
+              boxShadow: `0 0 8px ${emotionColorMap[lt.emotion]}`,
+            }}
+            onClick={() => setOpenedLetter(lt)}
           />
         ))}
       </main>
 
       <footer className="sky-footer">
-        별을 클릭하면 편지를 다시 읽을 수 있어요. · 총 {letters.length}개의 별이 만들어졌습니다.
+        {letters.length} stars have been created in this sky.
       </footer>
 
       {open && (
         <LetterModal
-          to={to}
-          slug={slug}
           onClose={() => setOpen(false)}
           onSaved={() => setOpen(false)}
         />
       )}
+
+      {openedLetter && (
+        <ReadLetterModal
+          letter={openedLetter}
+          onClose={() => setOpenedLetter(null)}
+        />
+      )}
+
+      <audio
+        ref={bgmRef}
+        src="/Lullaby.mp3"
+        autoPlay
+        loop
+        muted
+      />
+
     </div>
   );
 }
 
+/** 편지 작성 모달 */
 function LetterModal({
-  to, slug, onClose, onSaved,
-}: { to: string; slug: string; onClose: () => void; onSaved: () => void; }) {
+  onClose,
+  onSaved,
+}: {
+  onClose: () => void;
+  onSaved: () => void;
+}) {
   const [text, setText] = useState("");
+  const [emotion, setEmotion] = useState<Emotion>("happy");
 
   const submit = () => {
     const body = text.trim();
     if (!body) return;
-    addLetter(to, slug, body);
+    addLetter(body, emotion);
     onSaved();
   };
 
   return (
-    <div className="modal-backdrop" onClick={(e)=>{ if(e.target===e.currentTarget) onClose(); }}>
+    <div
+      className="modal-backdrop"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
       <div className="modal" role="dialog" aria-modal="true">
-        <h3>‘{to}’에게 편지 쓰기</h3>
+        <h3>Write a Letter</h3>
         <p style={{ margin: "6px 0 12px", color: "#6b7280" }}>
-          저장하면 이 편지는 밤하늘의 별이 됩니다.
+          편지는 밤 하늘의 별로 저장됩니다.
         </p>
+
+        <div className="emotion-picker">
+          {([
+            { key: "happy", emoji: "😊", label: "Happy" },
+            { key: "sad", emoji: "😢", label: "Sad" },
+            { key: "angry", emoji: "😡", label: "Angry" },
+            { key: "calm", emoji: "😌", label: "Calm" },
+          ] as const).map((e) => (
+            <button
+              key={e.key}
+              type="button"
+              className={`emotion-btn ${emotion === e.key ? "active" : ""}`}
+              onClick={() => setEmotion(e.key)}
+              aria-label={e.label}
+            >
+              <span className="emoji">{e.emoji}</span>
+              <span className="label">{e.label}</span>
+            </button>
+          ))}
+        </div>
+
+
         <textarea
           className="textarea"
           value={text}
-          onChange={(e)=>setText(e.target.value)}
-          placeholder="여기에 편지를 적어주세요..."
+          onChange={(e) => setText(e.target.value)}
         />
+
         <div className="modal-actions">
-          <button className="btn btn-outline" onClick={onClose}>취소</button>
-          <button className="btn btn-primary" onClick={submit} disabled={!text.trim()}>저장하기</button>
+          <button className="btn btn-outline" onClick={onClose}>
+            Cancel
+          </button>
+          <button
+            className="btn btn-primary"
+            onClick={submit}
+            disabled={!text.trim()}
+          >
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ReadLetterModal({
+  letter,
+  onClose
+}: {
+  letter: Letter;
+  onClose: () => void;
+}) {
+  return (
+    <div className="modal-backdrop" onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
+      <div className="modal" role="dialog" aria-modal="true">
+        <h3 style={{ marginBottom: "8px" }}>A letter I wrote before</h3>
+
+        <p style={{
+          whiteSpace: "pre-line",
+          lineHeight: "1.6",
+          marginBottom: "1rem",
+          color: "#374151"
+        }}>
+          {letter.body}
+        </p>
+
+        <p style={{ fontSize: "0.85rem", color: "#6b7280" }}>
+          {new Date(letter.createdAt).toLocaleString()}
+        </p>
+
+        <div className="modal-actions" style={{ marginTop: "1rem" }}>
+          <button className="btn btn-primary" onClick={onClose}>Close</button>
         </div>
       </div>
     </div>

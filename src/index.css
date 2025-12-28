@@ -1,111 +1,19 @@
-/* globals.css */
+/* index.css — root-level reset only */
 
-/* 공통 초기화 */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
+html, body, #root {
+  height: 100%;
+}
+
 body {
   font-family: 'Noto Sans KR', sans-serif;
   background-color: #fff;
-  color: #111827; /* 기본 글자색 */
-}
-
-/* 랜딩 페이지 */
-.hero {
-  min-height: 100vh;
-  background: linear-gradient(to bottom, #fde2f2, #ffffff); /* pink-50 → white */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 2rem;
-}
-
-.hero h1 {
-  font-size: 3rem;
-  font-weight: 800;
-  margin-top: 1rem;
-  color: #1f2937; /* neutral-800 */
-}
-.hero p {
-  margin-top: 1rem;
-  color: #4b5563; /* neutral-600 */
-  line-height: 1.6;
-}
-
-.hero-buttons {
-  display: flex;
-  gap: 1rem;
-  margin-top: 2rem;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.6rem 1rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  font-size: 0.95rem;
-  font-weight: 500;
-  text-decoration: none;
-}
-
-.btn-primary {
-  background: #a21caf; /* fuchsia-700 */
-  color: white;
-  border: none;
-}
-
-.btn-outline {
-  background: white;
-  color: #111827;
-  border: 1px solid #d1d5db; /* neutral-300 */
-}
-
-/* 별자리 페이지 */
-.sky {
-  min-height: 100vh;
-  background: radial-gradient(60% 80% at 50% 0%, #6124d6 0%, #3a0c69 40%, #130428 100%);
-  color: white;
-  display: flex;
-  flex-direction: column;
-}
-
-.sky-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.canvas {
-  flex: 1;
-  margin: 2rem;
-  border-radius: 1rem;
-  border: 1px solid rgba(255,255,255,.1);
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(6px);
-  position: relative;
-  min-height: 540px;
-}
-
-.star {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 24px;
-  color: #fbbf24; /* amber-400 */
-}
-
-.sky-footer {
-  text-align: center;
-  padding: 1rem;
-  font-size: 0.85rem;
-  color: rgba(255,255,255,0.7);
+  color: #111827; /* 기본 글자색*/
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
