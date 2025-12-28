@@ -1,0 +1,190 @@
+.page {
+  min-height: 100vh;
+  background: white;
+  padding: 20px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ff5ba0;
+}
+
+.nav button {
+  margin-left: 15px;
+}
+
+/* 배경 이미지 */
+.hero {
+  position: relative;
+  height: 980px;
+  background-image: url("/star.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-actionBtn {
+  position: absolute;
+
+  bottom: 170px;
+  /* 이미지 하단에서 살짝 위 */
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  padding: 16px 36px;
+  font-size: 18px;
+  font-weight: 600;
+
+  background: #ff5ba0;
+  color: white;
+  border: none;
+  border-radius: 999px;
+
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(255, 91, 160, 0.4);
+  transition: all 0.25s ease;
+}
+
+.hero-actionBtn:hover {
+  transform: translateX(-50%) translateY(-3px);
+  box-shadow: 0 14px 36px rgba(255, 91, 160, 0.55);
+}
+
+/* Content layout */
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  min-height: calc(100vh - 80px);
+  /* 헤더 높이 고려 */
+  margin: 0 auto;
+  padding-top: 12vh;
+}
+
+/* Right text area */
+.body {
+  display: flex;
+  justify-content: center;
+  /* 가로 중앙 */
+  padding: 80px 20px 120px;
+  /* 위/아래 여백 */
+}
+
+.price {
+  font-size: 22px;
+  font-weight: bold;
+  color: #ff5ba0;
+  margin-bottom: 20px;
+}
+
+.section {
+  margin: 12px 0;
+}
+
+.red {
+  color: red;
+  font-weight: bold;
+}
+
+/* Button */
+.nav button {
+  border: 1px solid #ccc;
+  background: white;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.nav button:hover {
+  background: #f7f7f7;
+}
+
+.to-wrapper {
+  margin: 20px 0 30px 0;
+}
+
+.to-label {
+  display: block;
+  font-size: 20px;
+  font-weight: 600;
+  color: #ff5ba0;
+  /* 네 메인 포인트 컬러 */
+  margin-bottom: 8px;
+}
+
+.to-input {
+  width: 260px;
+  border: none;
+  border-bottom: 2px solid #ffd3e6;
+  padding: 10px 4px;
+  font-size: 18px;
+  background: transparent;
+  outline: none;
+  transition: 0.2s;
+}
+
+.to-input::placeholder {
+  color: #c7c7c7;
+  font-size: 15px;
+}
+
+.to-input:focus {
+  border-bottom-color: #ff5ba0;
+}
+
+.mini-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #777;
+  letter-spacing: 2px;
+  margin-bottom: 18px;
+}
+
+/* 아이콘 */
+.icon {
+  margin-left: 6px;
+  font-size: 18px;
+}
+
+.detail {
+  background: #fff7fb;
+  border: 1px solid #ffe2ef;
+  border-radius: 20px;
+
+  padding: 70px 90px;
+  max-width: 900px;
+  width: 100%;
+
+  text-align: center;
+  /* 글씨 가운데 */
+  box-shadow: 0 12px 30px rgba(255, 150, 200, 0.18);
+}
+
+.detail p {
+  font-size: 30px;
+  /* 글씨 키우기 */
+  line-height: 1.6;
+  color: #444;
+
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+/* To 입력 모달 전용 */
+.modal.to-modal {
+  width: 420px;
+  max-width: 90vw;
+  padding: 24px 28px;
+}
